@@ -1,0 +1,32 @@
+name: Python CI/CD Pipeline
+
+# When does this workflow run?
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    # What machine to run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Get the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Step 3: Run the Python script
+      - name: Run main.py
+        run: python main.py
+
+      # Step 4: Show success message
+      - name: Pipeline complete
+        run: echo "✅ CI/CD Pipeline ran successfully!"
